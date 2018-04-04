@@ -1,53 +1,58 @@
 <template>
-  <div>
+  <div class="full_screen">
+    <i-header :title="title"></i-header>
+    <div class="content_scroll">
+      <group :title="'no placeholder, the current value is : ' + defaultValue">
+        <selector ref="defaultValueRef" title="省份" :options="list" v-model="defaultValue"></selector>
+      </group>
 
-    <group :title="'no placeholder, the current value is : ' + defaultValue">
-      <selector ref="defaultValueRef" title="省份" :options="list" v-model="defaultValue"></selector>
-    </group>
+      <div style="padding:15px;">
+        <x-button type="primary" @click.native="getValue('defaultValueRef')">get full value</x-button>
+      </div>
 
-    <div style="padding:15px;">
-      <x-button type="primary" @click.native="getValue('defaultValueRef')">get full value</x-button>
-    </div>
+      <group title="with placeholder">
+        <selector placeholder="请选择省份" v-model="demo01" title="省份" name="district" :options="list" @on-change="onChange"></selector>
+      </group>
 
-    <group title="with placeholder">
-      <selector placeholder="请选择省份" v-model="demo01" title="省份" name="district" :options="list" @on-change="onChange"></selector>
-    </group>
+      <group title="without title">
+        <selector placeholder="请选择省份" v-model="demo02" :options="list"></selector>
+      </group>
 
-    <group title="without title">
-      <selector placeholder="请选择省份" v-model="demo02" :options="list"></selector>
-    </group>
+      <group title="set value=广西">
+        <selector v-model="value1" title="省份" :options="plainList" @on-change="onChange"></selector>
+      </group>
 
-    <group title="set value=广西">
-      <selector v-model="value1" title="省份" :options="plainList" @on-change="onChange"></selector>
-    </group>
+      <group title="readonly, displays just like a cell">
+        <selector value="gd" readonly title="省份" :options="list"></selector>
+      </group>
 
-    <group title="readonly, displays just like a cell">
-      <selector value="gd" readonly title="省份" :options="list"></selector>
-    </group>
+      <group title="use plain options">
+        <selector ref="plainValueRef" value="C" title="Selector" :options="list1" @on-change="onChange"></selector>
+      </group>
 
-    <group title="use plain options">
-      <selector ref="plainValueRef" value="C" title="Selector" :options="list1" @on-change="onChange"></selector>
-    </group>
+      <div style="padding:15px;">
+        <x-button type="primary" @click.native="getValue('plainValueRef')">get full value</x-button>
+      </div>
 
-    <div style="padding:15px;">
-      <x-button type="primary" @click.native="getValue('plainValueRef')">get full value</x-button>
-    </div>
+      <group :title="'boolean selector: ' + value3">
+        <selector v-model="value3" title="Vux Is Cool" :options="list2"></selector>
+      </group>
 
-    <group :title="'boolean selector: ' + value3">
-      <selector v-model="value3" title="Vux Is Cool" :options="list2"></selector>
-    </group>
-
-    <group title="cell demo">
-      <cell title="VUX" value="HelloWorld" is-link link="/HelloWorld"></cell>
-    </group>
-    <group title="cell demo">
-      <cell title="VUX" value="HelloFromVux" is-link link="/HelloFromVux"></cell>
-    </group>
-    <group title="cell demo">
-      <cell title="VUX" value="newTestVux" is-link link="/newTestVux"></cell>
-    </group>
-    <div style="padding:15px;">
-      <x-button type="primary" @click.native="getValue('valueMapRef')">get full value</x-button>
+      <group title="cell demo">
+        <cell title="VUX" value="HelloWorld" is-link link="/HelloWorld"></cell>
+      </group>
+      <group title="cell demo">
+        <cell title="VUX" value="HelloFromVux" is-link link="/HelloFromVux"></cell>
+      </group>
+      <group title="cell demo">
+        <cell title="VUX" value="newTestVux" is-link link="/newTestVux"></cell>
+      </group>
+      <group title="cell demo">
+        <cell title="VUX" value="testDrawer" is-link link="/testDrawer"></cell>
+      </group>
+      <div style="padding:15px;">
+        <x-button type="primary" @click.native="getValue('valueMapRef')">get full value</x-button>
+      </div>
     </div>
 
   </div>
@@ -55,17 +60,19 @@
 
 <script>
   import { Selector, Group, Cell, CellBox, XButton } from 'vux'
-
+  import Iheader from '../components/header'
   export default {
     components: {
       Group,
       Selector,
       Cell,
       CellBox,
-      XButton
+      XButton,
+      'i-header': Iheader
     },
     data () {
       return {
+        title: 'selectTestVux',
         demo01: null,
         demo02: '',
         defaultValue: 'gd',

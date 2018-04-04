@@ -33,6 +33,16 @@ export default new Router({
       path: '/selectTestVux',
       name: 'selectTestVux',
       component: (resolve) => require(['../view/selectTestVux'], resolve)
+    },
+    {
+      path: '/testDrawer',
+      name: 'testDrawer',
+      component: (resolve) => require(['../view/testDrawer'], resolve)
+    },
+    {
+      path: '/testTable',
+      name: 'testTable',
+      component: (resolve) => require(['../view/testTable'], resolve)
     }
   ]
 })
