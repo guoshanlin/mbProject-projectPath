@@ -1,25 +1,38 @@
 <template>
-  <div @touch="hideSelectDown" style="background-color: #eee">
+  <div>
      <div :id='id' class="multi_select_" @click="selectShow">
         <div> 下拉外框</div>
          <slot></slot>
      </div>
-     <div v-show="dropDown" class="multi_select_drop-down">
+    <div v-transfer-dom>
+      <popup v-model="dropDown" position="bottom" max-height="50%">
         <div class="select_keyWorld">
-            <x-input type="text" :placeholder="placeholder" v-model="params.keyWord" @on-enter="onEnter"></x-input>
+          <x-input type="text" :placeholder="placeholder" v-model="params.keyWord" @on-enter="onEnter"></x-input>
         </div>
         <div class="select_item">
           <checklist :options="rows" v-model="selectValue" :max=6 @on-change="change"></checklist>
-          <div v-for="item in rows">
-               <p>{{item.name}}</p>
-            </div>
         </div>
-     </div>
+        <div style="padding: 15px;">
+          <x-button @click.native="dropDown = false" plain type="primary"> Close Me </x-button>
+        </div>
+      </popup>
+    </div>
+     <!--<div v-show="dropDown" class="multi_select_drop-down">-->
+        <!--<div class="select_keyWorld">-->
+            <!--<x-input type="text" :placeholder="placeholder" v-model="params.keyWord" @on-enter="onEnter"></x-input>-->
+        <!--</div>-->
+        <!--<div class="select_item">-->
+          <!--<checklist :options="rows" v-model="selectValue" :max=6 @on-change="change"></checklist>-->
+          <!--<div v-for="item in rows">-->
+               <!--<p>{{item.name}}</p>-->
+            <!--</div>-->
+        <!--</div>-->
+     <!--</div>-->
   </div>
 </template>
 
 <script>
-  import { XInput, Checklist } from 'vux'
+  import { XInput, Checklist, Actionsheet, TransferDom, Popup, XButton } from 'vux'
   export default {
     data () {
       return {
@@ -41,7 +54,13 @@
     },
     components: {
       XInput,
-      Checklist
+      Checklist,
+      Actionsheet,
+      Popup,
+      XButton
+    },
+    directives: {
+      TransferDom
     },
     props: {
       id: {
@@ -58,7 +77,7 @@
       },
       field: {
         type: Array,
-        default: []
+        default: null
       },
       placeholder: {
         type: String,
@@ -76,9 +95,8 @@
       change (val, label) {
         console.log('change', val, label)
       },
-      hideSelectDown () {
-        console.log('移出。。。')
-        this.dropDown = false
+      clickActionSheet () {
+
       }
     }
   }
