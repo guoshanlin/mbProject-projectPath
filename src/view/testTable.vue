@@ -27,7 +27,6 @@
       <div style="padding: 0 15px;">
         <div>
           <e-list :rows="rows"></e-list>
-
         </div>
       </div>
     </div>

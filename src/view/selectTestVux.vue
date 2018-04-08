@@ -53,6 +53,7 @@
       <div style="padding:15px;">
         <x-button type="primary" @click.native="getValue('valueMapRef')">get full value</x-button>
       </div>
+      <multiSelect ></multiSelect>
     </div>
 
   </div>
@@ -61,6 +62,7 @@
 <script>
   import { Selector, Group, Cell, CellBox, XButton } from 'vux'
   import Iheader from '../components/header'
+  import multiSelect from '../components/multiSelect'
   export default {
     components: {
       Group,
@@ -68,6 +70,7 @@
       Cell,
       CellBox,
       XButton,
+      multiSelect,
       'i-header': Iheader
     },
     data () {
