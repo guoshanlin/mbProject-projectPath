@@ -53,7 +53,16 @@
       <div style="padding:15px;">
         <x-button type="primary" @click.native="getValue('valueMapRef')">get full value</x-button>
       </div>
-      <multiSelect ></multiSelect>
+      <multiSelect url='/users' name="name" value="id" size='5' :search='true'>
+        <group>
+          <cell value="下拉1"></cell>
+        </group>
+      </multiSelect>
+      <multiSelect url='/users' name="name" value="id" size='2'>
+        <group>
+          <cell value="下拉2"></cell>
+        </group>
+      </multiSelect>
     </div>
 
   </div>
@@ -75,6 +84,7 @@
     },
     data () {
       return {
+        true: true,
         title: 'selectTestVux',
         demo01: null,
         demo02: '',
